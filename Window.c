@@ -9,8 +9,6 @@ struct window
 
 int processWindow(window* w, void (*mouseFunc)(int type, int button, int x, int y), void (*keyPress)(int code), void (*keyRelease)(int code))
 {
-	static XEvent lastEvent;
-
 	XEvent event;
 
 	while( XPending(w->g_pDisplay) > 0)
@@ -79,8 +77,6 @@ int processWindow(window* w, void (*mouseFunc)(int type, int button, int x, int 
 			}break;
 		}
 		
-		lastEvent = event;
-
 	}
 	
 	return 1;
@@ -99,9 +95,7 @@ int showWindow(window* w)
 
 
 window* initWindow()
-{
-	int tela, res_x, res_y;
-
+{	
 	window* w = (window*)malloc(sizeof(window));
 
 	XSetWindowAttributes windowAttributes;
@@ -128,12 +122,7 @@ window* initWindow()
         fprintf(stderr, "glxsimple: %s\n", "X server has no OpenGL GLX extension");
         exit(1);
     }
-
-    tela = DefaultScreen(w->g_pDisplay);
-
-	res_x = DisplayWidth(w->g_pDisplay, tela);
-	res_y = DisplayHeight(w->g_pDisplay, tela);
-
+   
     //printf("Resolucao do sistema: %dx%d\n", res_x, res_y);
 
     // Find an appropriate visual
