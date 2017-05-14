@@ -1,0 +1,14 @@
+To compile
+	make
+
+To install
+	make install (needs root permission)
+
+To unistall
+	make uninstall (needs root permission)
+
+To clean
+	make clean
+
+To play
+	plot
